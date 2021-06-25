@@ -13,14 +13,15 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
+      searchResults = searchByTrait(people);
       break;
       default:
     app(people); // restart app
       break;
   }
-  
+
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+  mainMenu(searchResults[0], people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -34,10 +35,16 @@ function mainMenu(person, people){
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  //let info = `Information ${data[0]}`
+  let info = `First Name: ${person.firstName}\nLast Name: ${person.lastName}\nGender: ${person.gender}\nDOB: ${person.dob}\nHeight: ${person.height}\nWeight: ${person.weight}\nEye Color: ${person.eyeColor}\nOccupation: ${person.occupation}\nParents: ${person.parents}\nCurrent Spouse: ${person.currentSpouse}`
 
+  //let info = data[0].firstName + " "+ data[0].lastName +" "+ data[0].gender +" "+ data[0].dob + " " + data[0].height +" "+ data[0].weight +" "+ data[0].eyeColor +" "+ data[0].occupation +" "+ data[0].parents +" "+ data[0].currentSpouse
   switch(displayOption){
+
     case "info":
+      alert(info)
     // TODO: get person's info
+    //displayOption()
     break;
     case "family":
     // TODO: get person's family
@@ -56,17 +63,21 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+  let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
 
-  let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
+  let foundPerson = people.filter(
+    
+    function(person){
+      if(person.firstName.toLowerCase() === firstName && person.lastName.toLowerCase() === lastName){
+        return true;
+      }
+      else{
+        return false;
+      }
+  }
+  
+  )
   // TODO: find the person using the name they entered
   return foundPerson;
 }
@@ -83,8 +94,14 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "height:" + person.height + "\n";
+  personInfo += "weight:" + person.weight + "\n";
+  personInfo += "age:" + person.age + "\n";
+  personInfo += "occupation:" + person.occupation + "\n";
+  personInfo += "eye color:" + person.eyeColor + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+  return personInfo;
 }
 
 // function that prompts and validates user input
