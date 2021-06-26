@@ -14,12 +14,13 @@ function app(people){
     case 'no':
                   // TODO: search by traits
       searchResults = searchByTrait(people);
+      console.log(searchResults)
       break;
       default:
     app(people); // restart app
       break;
   }
-
+  
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -67,16 +68,16 @@ function searchByTrait(people){
 
   let displayTrait = people.filter(function(person){
     
-      if(person.gender.toLowerCase() || person.eyeColor.toLowerCase() || person.dob.toLowerCase() || person.height || person.weight == traits){
+      if(person.gender.toLowerCase() === traits || person.eyeColor.toLowerCase() === traits || person.dob.toLowerCase()=== traits || person.height === traits || person.weight === traits){
         return true;
       }
       else{
         return false;
       }
   }
-  
   )
-  mainMenu
+
+  return displayTrait
   // TODO: find the person using the trait they entered
 }
 
