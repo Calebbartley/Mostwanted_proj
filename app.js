@@ -12,7 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+                  // TODO: search by traits
       searchResults = searchByTrait(people);
       break;
       default:
@@ -21,7 +21,7 @@ function app(people){
   }
 
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults[0], people);
+  mainMenu(searchResults, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -35,10 +35,10 @@ function mainMenu(person, people){
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-  //let info = `Information ${data[0]}`
-  let info = `First Name: ${person.firstName}\nLast Name: ${person.lastName}\nGender: ${person.gender}\nDOB: ${person.dob}\nHeight: ${person.height}\nWeight: ${person.weight}\nEye Color: ${person.eyeColor}\nOccupation: ${person.occupation}\nParents: ${person.parents}\nCurrent Spouse: ${person.currentSpouse}`
 
-  //let info = data[0].firstName + " "+ data[0].lastName +" "+ data[0].gender +" "+ data[0].dob + " " + data[0].height +" "+ data[0].weight +" "+ data[0].eyeColor +" "+ data[0].occupation +" "+ data[0].parents +" "+ data[0].currentSpouse
+  let info = `First Name: ${person.firstName} \nLast Name: ${person.lastName} \nGender: ${person.gender} \nDOB: ${person.dob} \nHeight: ${person.height} \nWeight: ${person.weight} \nEye Color: ${person.eyeColor} \nOccupation: ${person.occupation} \nParents: ${person.parents} \nCurrent Spouse: ${person.currentSpouse}`
+  let traits = info
+
   switch(displayOption){
 
     case "info":
@@ -61,6 +61,26 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+
+function searchByTrait(people){
+  let traits =  promptFor('Please provide their gender', chars).toLowerCase();
+
+  let displayTrait = people.filter(function(person){
+    
+      if(person.gender.toLowerCase() || person.eyeColor.toLowerCase() || person.dob.toLowerCase() || person.height || person.weight == traits){
+        return true;
+      }
+      else{
+        return false;
+      }
+  }
+  
+  )
+  mainMenu
+  // TODO: find the person using the trait they entered
+}
+
+
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
@@ -89,6 +109,21 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+function displayTrait(traits){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  let personTrait;
+  height = "height:" + person.height + "\n";
+  weight = "weight:" + person.weight + "\n";
+  age = "age:" + person.age + "\n";
+  eyeColor = "eye color:" + person.eyeColor + "\n";
+  gender = "gender:" + person.gender + "\n";
+  // TODO: finish getting the rest of the information to display
+  alert(personTrait);
+  return personTrait;
+}
+
+
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
@@ -99,6 +134,7 @@ function displayPerson(person){
   personInfo += "age:" + person.age + "\n";
   personInfo += "occupation:" + person.occupation + "\n";
   personInfo += "eye color:" + person.eyeColor + "\n";
+  personInfo += "gender:" + person.gender + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
   return personInfo;
