@@ -13,14 +13,15 @@ function app(people){
       break;
     case 'no':
                   // TODO: search by traits
+                  //alert(arrayObj.join('\n'))
       searchResults = searchByTrait(people);
       console.log(searchResults)
+
       break;
       default:
     app(people); // restart app
       break;
   }
-  
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -35,11 +36,11 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
-  let info = `First Name: ${person.firstName} \nLast Name: ${person.lastName} \nGender: ${person.gender} \nDOB: ${person.dob} \nHeight: ${person.height} \nWeight: ${person.weight} \nEye Color: ${person.eyeColor} \nOccupation: ${person.occupation} \nParents: ${person.parents} \nCurrent Spouse: ${person.currentSpouse}`
-  let traits = info
-
+  let info = `First Name: ${person[0].firstName} \nLast Name: ${person[0].lastName} \nGender: ${person[0].gender} \nDOB: ${person[0].dob} \nHeight: ${person[0].height} \nWeight: ${person[0].weight} \nEye Color: ${person[0].eyeColor} \nOccupation: ${person[0].occupation} \nParents: ${person[0].parents} \nCurrent Spouse: ${person[0].currentSpouse}`
+  //let males = ["Billy Bob","Michael Walkens","Jon walkens","Jack Pafoy" ]//Mister Potatoo \nMader Madden \nRalph Bob \nDave Pafoy \nMattias Madden`]
+  let Females = `Uma Bob, Jen Pafoy, Missuz Potatoo, Joy Madden, Jill Pafoy, Jasmine Bob, Amii Pafoy, Regina Madden, Hana madden, Eloise Madden, Ellen Madden, Joey madden`
   switch(displayOption){
 
     case "info":
@@ -65,21 +66,20 @@ function mainMenu(person, people){
 
 function searchByTrait(people){
   let traits =  promptFor('Please provide their gender', chars).toLowerCase();
+  let male = `Billy Bob,\n Michael Walkens,\n Jon walkens,\n Jack Pafoy,\n Mister Potatoo,\n Mader Madden,\n Ralph Bob,\n Dave Pafoy,\n Mattias Madden`;
+  let females = `Uma Bob,\n Jen Pafoy, \n Missuz Potatoo, \n Joy Madden, \n Jill Pafoy, \n Jasmine Bob, \n Annie Pafoy, \n Amii Pafoy, \n Regina Madden, \n Hana Madden, \n Eloise Madden, \n Ellen Madden, \n Joey Madden `
+  let foundTrait = people.filter(function(person){
 
-  let displayTrait = people.filter(function(person){
-    
-      if(person.gender.toLowerCase() === traits || person.eyeColor.toLowerCase() === traits || person.dob.toLowerCase()=== traits || person.height === traits || person.weight === traits){
-        return true;
-      }
-      else{
-        return false;
-      }
-  }
-  )
-
-  return displayTrait
+    if(person.gender.toLowerCase=== traits){
+      alert(male)
+    }
+    else if(person.gender.toLowerCase === traits){
+      alert(females)
+    }
+ // alert(displayTrait);
+  return app(people);
   // TODO: find the person using the trait they entered
-}
+})}
 
 
 
@@ -106,19 +106,19 @@ function searchByName(people){
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
+    return person[0].firstName + " " + person[0].lastName;
   }).join("\n"));
 }
 
 function displayTrait(traits){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personTrait;
-  height = "height:" + person.height + "\n";
-  weight = "weight:" + person.weight + "\n";
-  age = "age:" + person.age + "\n";
-  eyeColor = "eye color:" + person.eyeColor + "\n";
-  gender = "gender:" + person.gender + "\n";
+  let personTrait =
+  height = "height:" + person[0].height + "\n";
+  weight = "weight:" + person[0].weight + "\n";
+  age = "age:" + person[0].age + "\n";
+  eyeColor = "eye color:" + person[0].eyeColor + "\n";
+  gender = "gender:" + person[0].gender + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personTrait);
   return personTrait;
@@ -128,14 +128,14 @@ function displayTrait(traits){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "height:" + person.height + "\n";
-  personInfo += "weight:" + person.weight + "\n";
-  personInfo += "age:" + person.age + "\n";
-  personInfo += "occupation:" + person.occupation + "\n";
-  personInfo += "eye color:" + person.eyeColor + "\n";
-  personInfo += "gender:" + person.gender + "\n";
+  let personInfo = "First Name: " + person[0].firstName + "\n";
+  personInfo += "Last Name: " + person[0].lastName + "\n";
+  personInfo += "height:" + person[0].height + "\n";
+  personInfo += "weight:" + person[0].weight + "\n";
+  personInfo += "age:" + person[0].age + "\n";
+  personInfo += "occupation:" + person[0].occupation + "\n";
+  personInfo += "eye color:" + person[0].eyeColor + "\n";
+  personInfo += "gender:" + person[0].gender + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
   return personInfo;
