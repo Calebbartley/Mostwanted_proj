@@ -16,12 +16,14 @@ function app(people){
                   //alert(arrayObj.join('\n'))
       searchResults = searchByTrait(people);
       console.log(searchResults)
+      alert(searchResults)
 
       break;
       default:
     app(people); // restart app
       break;
   }
+
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -37,10 +39,10 @@ function mainMenu(person, people){
   }
 
   let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-
+  let family = `Family:\n ${person[0].parents} \n ${person[0].currentSpouse}`
   let info = `First Name: ${person[0].firstName} \nLast Name: ${person[0].lastName} \nGender: ${person[0].gender} \nDOB: ${person[0].dob} \nHeight: ${person[0].height} \nWeight: ${person[0].weight} \nEye Color: ${person[0].eyeColor} \nOccupation: ${person[0].occupation} \nParents: ${person[0].parents} \nCurrent Spouse: ${person[0].currentSpouse}`
   //let males = ["Billy Bob","Michael Walkens","Jon walkens","Jack Pafoy" ]//Mister Potatoo \nMader Madden \nRalph Bob \nDave Pafoy \nMattias Madden`]
-  let Females = `Uma Bob, Jen Pafoy, Missuz Potatoo, Joy Madden, Jill Pafoy, Jasmine Bob, Amii Pafoy, Regina Madden, Hana madden, Eloise Madden, Ellen Madden, Joey madden`
+  //let Females = `Uma Bob, Jen Pafoy, Missuz Potatoo, Joy Madden, Jill Pafoy, Jasmine Bob, Amii Pafoy, Regina Madden, Hana madden, Eloise Madden, Ellen Madden, Joey madden`
   switch(displayOption){
 
     case "info":
@@ -49,6 +51,7 @@ function mainMenu(person, people){
     //displayOption()
     break;
     case "family":
+      alert(family)
     // TODO: get person's family
     break;
     case "descendants":
@@ -65,21 +68,86 @@ function mainMenu(person, people){
 }
 
 function searchByTrait(people){
-  let traits =  promptFor('Please provide their gender', chars).toLowerCase();
-  let male = `Billy Bob,\n Michael Walkens,\n Jon walkens,\n Jack Pafoy,\n Mister Potatoo,\n Mader Madden,\n Ralph Bob,\n Dave Pafoy,\n Mattias Madden`;
-  let females = `Uma Bob,\n Jen Pafoy, \n Missuz Potatoo, \n Joy Madden, \n Jill Pafoy, \n Jasmine Bob, \n Annie Pafoy, \n Amii Pafoy, \n Regina Madden, \n Hana Madden, \n Eloise Madden, \n Ellen Madden, \n Joey Madden `
-  let foundTrait = people.filter(function(person){
+  let searchType = prompt('To Search lists by Gender enter "G". \n  To search lists by Eye color enter "E". \n To search lists by height enter "H". \n To search lists by weight "W". ').toUpperCase();
+  let genderSearchResultsM = people.filter(person => person.gender === 'male');
+  let genderSearchResultsF = people.filter(person => person.gender === 'female');
+  let G = ('Men:'+" " + ('\n') + ' ' + (genderResultsString(genderSearchResultsM)))+ ' ' + ('\n')+ ' ' + ('Women:'+" " + ('\n') + ' ' + (genderResultsString(genderSearchResultsF)));
+  //alert(G);
+  //return app(people);
+  let eyeColorSearchBro = people.filter(person => person.eyeColor === 'brown');
+  let eyeColorSearchHzl = people.filter(person => person.eyeColor === 'hazel');
+  let eyeColorSearchBlk = people.filter(person => person.eyeColor === 'black');
+  let eyeColorSearchBlu = people.filter(person => person.eyeColor === 'blue');
+  let eyeColorSearchGrn = people.filter(person => person.eyeColor === 'green');
+  let E = ('Brown:'+ " " + ('\n') + " "+(eyeColorResultsString(eyeColorSearchBro))) + " " + ('\n')+ " " + ('\n')+ ' ' +('Black Eyes:'+ " " + ('\n')+ " "+ (eyeColorResultsString(eyeColorSearchBlk)))+ " " + ('\n')+ " " + ('\n')+ ' ' +('Hazel Eyes:'+ " " + ('\n')+ " "+ (eyeColorResultsString(eyeColorSearchHzl)))+ " " + ('\n')+ " " + ('\n')+ ' ' +('Blue Eyes:'+ " " + ('\n')+ " "+(eyeColorResultsString(eyeColorSearchBlu)))+ " " + ('\n')+ " " + ('\n')+ ' ' +('Green Eyes:'+ " " + ('\n')+ " "+(eyeColorResultsString(eyeColorSearchGrn)));
+ 
+ 
+  let heightResultsSearch = people.filter(person => person.height <= 76);
+  let H = ('height in inches:'+ " " +('\n')+ " " +(heightResultsString(heightResultsSearch)))
 
-    if(person.gender.toLowerCase=== traits){
-      alert(male)
-    }
-    else if(person.gender.toLowerCase === traits){
-      alert(females)
-    }
- // alert(displayTrait);
-  return app(people);
-  // TODO: find the person using the trait they entered
-})}
+  let weightResultsSearch = people.filter(person => person.weight <= 257);
+  let W = ('weight in pounds:'+ " " +('\n')+ " " +(weightResultsString(weightResultsSearch)))
+  //alert(E);
+  // return app(people);
+  
+  // let W = weight;
+  if(searchType === 'G'){
+    alert(G);
+  }
+  else if(searchType === 'E'){
+    alert(E);
+  }
+  else if(searchType === 'H'){
+    alert(H);
+  }
+  else if(searchType === 'W'){
+    alert(W);
+  }
+ return app(people);
+
+  }
+
+function genderResultsString(list){
+  let stringNames = []
+  for (let index = 0; index < list.length; index++) {
+    let personName = list[index].firstName + " " + list[index].lastName;
+    stringNames.push(personName)
+
+  }
+  return stringNames.join('\n');
+}
+function eyeColorResultsString(list){
+  let stringColors = []
+  for (let index = 0; index < list.length; index++) {
+    let personName = list[index].firstName + " " + list[index].lastName;
+    stringColors.push(personName)
+
+  }
+  return stringColors.join('\n');
+}
+function heightResultsString(list){
+  let stringHeight = []
+  for (let index = 0; index < list.length; index++) {
+    let personName = list[index].firstName + " " + list[index].lastName + " " + list[index].height;
+    stringHeight.push(personName)
+
+  }
+  return stringHeight.join('\n');
+}
+
+function weightResultsString(list){
+  let stringWeight = []
+  for (let index = 0; index < list.length; index++) {
+    let personName = list[index].firstName + " " + list[index].lastName + " " + list[index].weight;
+    stringWeight.push(personName)
+
+  }
+  return stringWeight.join('\n');
+}
+
+  // let Gender = people.filter(person => person.eyeColor == );
+  // let Gender = people.filter(person => person.height >= 80);
+  // let Gender = people.filter(person => person.weight >= 300);
 
 
 
@@ -87,9 +155,7 @@ function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
   let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
 
-  let foundPerson = people.filter(
-    
-    function(person){
+  let foundPerson = people.filter( function(person){
       if(person.firstName.toLowerCase() === firstName && person.lastName.toLowerCase() === lastName){
         return true;
       }
