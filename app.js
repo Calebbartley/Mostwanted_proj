@@ -41,7 +41,10 @@ function mainMenu(person, people){
   let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
   let family = `Family:\n ${person[0].parents} \n ${person[0].currentSpouse}`
   let info = `First Name: ${person[0].firstName} \nLast Name: ${person[0].lastName} \nGender: ${person[0].gender} \nDOB: ${person[0].dob} \nHeight: ${person[0].height} \nWeight: ${person[0].weight} \nEye Color: ${person[0].eyeColor} \nOccupation: ${person[0].occupation} \nParents: ${person[0].parents} \nCurrent Spouse: ${person[0].currentSpouse}`
-  console.log(findDescendants(person[0],people))
+  let descendants = `Descendants: \n ${findDescendants(person[0],people)}`
+  //stringCreator(descendants)
+  //alert(descendants)
+  //alert(findDescendants(person[0],people))
   //let males = ["Billy Bob","Michael Walkens","Jon walkens","Jack Pafoy" ]//Mister Potatoo \nMader Madden \nRalph Bob \nDave Pafoy \nMattias Madden`]
   //let Females = `Uma Bob, Jen Pafoy, Missuz Potatoo, Joy Madden, Jill Pafoy, Jasmine Bob, Amii Pafoy, Regina Madden, Hana madden, Eloise Madden, Ellen Madden, Joey madden`
   switch(displayOption){
@@ -56,6 +59,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
+      alert(descendants)
     // TODO: get person's descendants
     break;
     case "restart":
@@ -108,12 +112,15 @@ function searchByTrait(people){
 
   }
 
-// function findDescstring(list){
-//   let familyMembers = []
-//   for(let index = 0; index === list.parents && index === list.id; index++){
-//     let personName = list[index].firstName + " " + list[index].lastName;
-//   }
-// }
+function stringCreator(object){
+  let stringName = [];
+  for(let i = 0; i < object.length; i++){
+    let stringNames = `${object[i].firstName} ${object[i].lastName}`;
+    stringName.push(stringNames);
+  }
+  return stringName.join('\n');
+}
+
 
 function findDescendants(person,people){
   let foundDescendants = []
@@ -123,12 +130,14 @@ function findDescendants(person,people){
     }
   }
   for (let i = 0; i < foundDescendants.length; i++) {
-    foundDescendants = foundDescendants.concat(findDescendants(foundDescendants[i],people))
-    
+    foundDescendants = foundDescendants.concat(findDescendants(foundDescendants[i],people));{
+      return foundDescendants[i].firstName + " " + foundDescendants[i].lastName;
+    }
+  
   }
 
 
-  return foundDescendants;
+  return foundDescendants.length;
 }
 
 
