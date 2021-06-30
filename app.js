@@ -42,6 +42,7 @@ function mainMenu(person, people){
   let family = `Family:\n ${person[0].parents} \n ${person[0].currentSpouse}`
   let info = `First Name: ${person[0].firstName} \nLast Name: ${person[0].lastName} \nGender: ${person[0].gender} \nDOB: ${person[0].dob} \nHeight: ${person[0].height} \nWeight: ${person[0].weight} \nEye Color: ${person[0].eyeColor} \nOccupation: ${person[0].occupation} \nParents: ${person[0].parents} \nCurrent Spouse: ${person[0].currentSpouse}`
   let descendants = `Descendants: \n ${findDescendants(person[0],people)}`
+  // let foundDescendants = findDescendants(person[0],people);
   //stringCreator(descendants)
   //alert(descendants)
   //alert(findDescendants(person[0],people))
@@ -59,7 +60,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-      alert(descendants)
+      alert(foundDescendants)
     // TODO: get person's descendants
     break;
     case "restart":
@@ -133,11 +134,11 @@ function findDescendants(person,people){
     foundDescendants = foundDescendants.concat(findDescendants(foundDescendants[i],people));{
       return foundDescendants[i].firstName + " " + foundDescendants[i].lastName;
     }
-  
+
   }
 
 
-  return foundDescendants.length;
+  return foundDescendants;
 }
 
 
